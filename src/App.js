@@ -2,17 +2,21 @@ import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
 
+const initialState = {
+  name: '',
+  description: '',
+  atk: 0,
+  def: 0,
+  agi: 0,
+  image: '',
+  select: 'normal',
+  trunfo: false,
+  salvar: true,
+  // registeredCards: [],
+};
 class App extends React.Component {
   state = {
-    name: '',
-    description: '',
-    atk: 0,
-    def: 0,
-    agi: 0,
-    image: '',
-    select: 'normal',
-    trunfo: false,
-    salvar: true,
+    ...initialState,
   };
 
   validationFields = () => {
@@ -56,6 +60,10 @@ class App extends React.Component {
     }, this.validationFields);
   };
 
+  onSaveButtonClick = () => {
+    this.setState({ ...initialState });
+  };
+
   render() {
     const { name,
       description,
@@ -71,6 +79,7 @@ class App extends React.Component {
         <h1>Tryunfo</h1>
         <Form
           onInputChange={ this.onInputChange }
+          onSaveButtonClick={ this.onSaveButtonClick }
           cardName={ name }
           cardDescription={ description }
           cardAttr1={ atk }
@@ -81,7 +90,7 @@ class App extends React.Component {
           cardTrunfo={ trunfo }
           //   hasTrunfo,
           isSaveButtonDisabled={ salvar }
-          // onSaveButtonClick,/
+          // ,/
         />
         <Card
           cardName={ name }
