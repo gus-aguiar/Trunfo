@@ -27,7 +27,6 @@ class App extends React.Component {
     const validationImage = image.length > 0;
     const maxSum = 211;
     const validationSum = (+atk + +def + +agi) < maxSum;
-    console.log(validationSum);
     const maxNum = 91;
     const validationAttr1 = +atk < maxNum;
     const validationAttr2 = +def < maxNum;
