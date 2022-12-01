@@ -12,7 +12,7 @@ const initialState = {
   select: 'normal',
   trunfo: false,
   salvar: true,
-  // registeredCards: [],
+  registeredCards: [],
 };
 class App extends React.Component {
   state = {
@@ -60,8 +60,34 @@ class App extends React.Component {
     }, this.validationFields);
   };
 
-  onSaveButtonClick = () => {
-    this.setState({ ...initialState });
+  onSaveButtonClick = (event) => {
+    event.preventDefault();
+    const { name,
+      description,
+      atk,
+      def,
+      agi,
+      image,
+      select,
+      trunfo } = this.state;
+    const newCard = { name,
+      description,
+      atk,
+      def,
+      agi,
+      image,
+      select,
+      trunfo };
+    this.setState(({ registeredCards }) => ({
+      registeredCards: [...registeredCards, newCard],
+    }));
+    this.setState({ name: '',
+      description: '',
+      atk: 0,
+      def: 0,
+      agi: 0,
+      image: '',
+      select: 'normal' });
   };
 
   render() {
