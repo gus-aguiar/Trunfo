@@ -11,6 +11,7 @@ const initialState = {
   image: '',
   select: 'normal',
   trunfo: false,
+  hasTrunfo: false,
   salvar: true,
   registeredCards: [],
 };
@@ -69,7 +70,8 @@ class App extends React.Component {
       agi,
       image,
       select,
-      trunfo } = this.state;
+      trunfo,
+      registeredCards } = this.state;
     const newCard = { name,
       description,
       atk,
@@ -78,8 +80,14 @@ class App extends React.Component {
       image,
       select,
       trunfo };
-    this.setState(({ registeredCards }) => ({
-      registeredCards: [...registeredCards, newCard],
+
+    if (registeredCards.every((card) => (card.hasTrunfo))) {
+      this.setState({
+        hasTrunfo: true,
+      });
+    }
+    this.setState((prevState) => ({
+      registeredCards: [...prevState.registeredCards, newCard],
     }));
     this.setState({ name: '',
       description: '',
@@ -99,7 +107,8 @@ class App extends React.Component {
       image,
       select,
       trunfo,
-      salvar } = this.state;
+      salvar,
+      hasTrunfo } = this.state;
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -114,7 +123,7 @@ class App extends React.Component {
           cardImage={ image }
           cardRare={ select }
           cardTrunfo={ trunfo }
-          //   hasTrunfo,
+          hasTrunfo={ hasTrunfo }
           isSaveButtonDisabled={ salvar }
           // ,/
         />
